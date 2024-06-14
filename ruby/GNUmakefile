@@ -70,6 +70,9 @@ ifeq ($(platform),macos)
   endif
 else
   ruby.flags := $(flags.cpp)
+	ifeq ($(platform),bsd)
+		ruby.flags += -I/usr/X11R6/include
+	endif
 endif
 
 ruby.flags += -I../thirdparty
@@ -134,7 +137,7 @@ ifeq ($(platform),linux)
 endif
 
 ifeq ($(platform),bsd)
-  ruby.options += -lX11 -lXext -lXrandr
+  ruby.options += -L/usr/X11R6/lib -lX11 -lXext -lXrandr
   ruby.options += $(if $(findstring audio.openal,$(ruby)),-lopenal -fuse-ld=bfd)
   # -fuse-ld=bfd: see FreeBSD bug 219089
 endif

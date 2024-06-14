@@ -109,6 +109,8 @@ int64_t get_current_time_nsecs()
 	struct timespec ts = {};
 #ifdef ANDROID
 	constexpr auto timebase = CLOCK_MONOTONIC;
+#elif defined (__OpenBSD__)
+	constexpr auto timebase = CLOCK_MONOTONIC;
 #else
 	constexpr auto timebase = CLOCK_MONOTONIC_RAW;
 #endif

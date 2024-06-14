@@ -230,7 +230,7 @@ ifeq ($(lto),true)
         options += -Wl,-cache_path_lto,$(object.path)/lto
       else ifeq ($(msvc),true)
         options += -Wl,-lldltocache:$(object.path)/lto
-      else
+      else ifeq ($(platform),linux)
         options += -Wl,--thinlto-cache-dir=$(object.path)/lto
       endif
     endif

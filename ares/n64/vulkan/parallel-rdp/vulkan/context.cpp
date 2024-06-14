@@ -30,6 +30,15 @@
 #include <algorithm>
 #include <string.h>
 
+#ifdef __OpenBSD__
+#include <vulkan/vulkan.h>
+#include <vulkan/vulkan_core.h>
+#include <vulkan/vulkan_beta.h>
+#ifndef VK_KHR_LOAD_STORE_OP_NONE_EXTENSION_NAME
+#define VK_KHR_LOAD_STORE_OP_NONE_EXTENSION_NAME "VK_KHR_load_store_op_none"
+#endif
+#endif
+
 #ifndef _WIN32
 #include <dlfcn.h>
 #elif defined(_WIN32)

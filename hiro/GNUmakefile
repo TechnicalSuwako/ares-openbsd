@@ -74,6 +74,11 @@ ifneq ($(filter $(platform),linux bsd),)
   else
     $(error unrecognized hiro backend $(hiro))
   endif
+
+	ifeq ($(platform),bsd)
+		hiro.flags += -I/usr/X11R6/include -I/usr/local/include/cairo -I/usr/local/include/gtk-3.0 -I/usr/local/include/glib-2.0 -I/usr/local/lib/glib-2.0/include -I/usr/local/include/pango-1.0 -I/usr/local/include/harfbuzz -I/usr/local/include/gdk-pixbuf-2.0 -I/usr/local/include/atk-1.0
+		hiro.options += -L/usr/X11R6/lib
+	endif
 endif
 
 ifeq ($(hiro.resource),)

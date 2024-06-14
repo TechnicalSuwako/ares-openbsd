@@ -1,7 +1,11 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
+#ifdef __OpenBSD__
+#include <soundcard.h>
+#else
 #include <sys/soundcard.h>
+#endif
 
 //OSSv4 features: define fallbacks for OSSv3 (where these ioctls are ignored)
 

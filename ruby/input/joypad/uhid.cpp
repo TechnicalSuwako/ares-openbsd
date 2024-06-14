@@ -1,8 +1,15 @@
 #pragma once
 
 #include <usbhid.h>
+#ifdef __OpenBSD__
+#include <dev/usb/usb.h>
+#include <dev/usb/usbhid.h>
+#include <stdint.h>
+typedef uint8_t uByte;
+#else
 #include <dev/usb/usbhid.h>
 #include <dev/usb/usb_ioctl.h>
+#endif
 
 struct InputJoypadUHID {
   Input& input;
@@ -119,7 +126,11 @@ struct InputJoypadUHID {
       }
 
       joypad.report = hid_get_report_desc(joypad.fd);
+#ifdef __OpenBSD__
+      joypad.reportID = 0;
+#else
       joypad.reportID = hid_get_report_id(joypad.fd);
+#endif
       joypad.reportSize = hid_report_size(joypad.report, hid_input, joypad.reportID);
       joypad.buffer = new u8[joypad.reportSize];
       auto parse = hid_start_parse(joypad.report, 1 << hid_input, joypad.reportID);

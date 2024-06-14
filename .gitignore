@@ -16,3 +16,4 @@ thirdparty/SDL/libSDL2-2.0.0.dylib
 macos-xcode/
 .swiftpm
 *.xcodeproj
+*.core
